@@ -4,8 +4,10 @@ import Modelo.clsUsuario;
 import ModeloDAO.UsuarioDAO;
 import java.io.IOException;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+@WebServlet(name = "UsuarioControlador", urlPatterns = {"/UsuarioControlador"})
 public class UsuarioControlador extends HttpServlet {
 
     UsuarioDAO dao = new UsuarioDAO();
@@ -46,6 +48,21 @@ public class UsuarioControlador extends HttpServlet {
         } else {
             request.setAttribute("mensaje", "Usuario o contraseña incorrectos");
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if ("logout".equals(action)) {
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+            response.sendRedirect("index.jsp");
+        } else {
+            response.sendRedirect("index.jsp");
         }
     }
 }
