@@ -50,9 +50,11 @@ CREATE TABLE IF NOT EXISTS `boletas_permiso` (
   PRIMARY KEY (`id_boleta`),
   KEY `id_empleado` (`id_empleado`),
   CONSTRAINT `boletas_permiso_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_permisos_electrosur.boletas_permiso: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_permisos_electrosur.boletas_permiso: ~1 rows (aproximadamente)
+INSERT INTO `boletas_permiso` (`id_boleta`, `id_empleado`, `fecha_salida`, `hora_salida`, `fecha_retorno`, `hora_retorno`, `motivo`, `estado`) VALUES
+	(1, 1, '2025-10-22', '22:49:00', '2025-10-22', '23:53:00', 'Iker me encarcelo es su cuarto', 'PENDIENTE_JEFE');
 
 -- Volcando estructura para tabla db_permisos_electrosur.horas_acumuladas
 CREATE TABLE IF NOT EXISTS `horas_acumuladas` (
@@ -108,9 +110,13 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   KEY `id_jefe` (`id_jefe`),
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`),
   CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`id_jefe`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Volcando datos para la tabla db_permisos_electrosur.usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_permisos_electrosur.usuarios: ~3 rows (aproximadamente)
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `dni`, `username`, `password`, `id_rol`, `id_jefe`) VALUES
+	(1, 'Stevie', '72405382', 'Stevie', '123', 1, 1),
+	(2, 'IKer', '72266432', 'Iker', '123', 2, 1),
+	(3, 'Luis', '7777777', 'Luis', '123', 3, 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
